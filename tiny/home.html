@@ -1,7 +1,75 @@
-<html>
+<!-- <html>
 <head><title>test</title></head>
 <body> 
 <img align="middle" src="godzilla.gif">
 Dave O'Hallaron
 </body>
+</html> -->
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tiny Web-server</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        padding: 50px;
+      }
+      #wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
+      #hw-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+      video {
+        width: 50%;
+        height: 30%;
+        margin: 30px 0px;
+      }
+      form {
+        height: 30%;
+      }
+      input[type="button"] {
+        background-color: aquamarine;
+      }
+      input[type="button"]:hover {
+        color: white;
+        background-color: deeppink;
+      }
+    </style>
+    <script>
+      // !!!!!! 과제 11.10 !!!!!!
+      const adder = function () {
+        const n1 = document.querySelector("#n1").value;
+        const n2 = document.querySelector("#n2").value;
+        const url = `http://3.39.10.157:5000/cgi-bin/adder?${n1}&${n2}`;
+        location.href = url;
+      };
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <h1><img align="middle" src="godzilla.gif" />성환's Tiny Server</h1>
+      <div id="hw-container">
+        <!-- 과제 11.7 -->
+        <video src="video.mp4" controls loop autoplay></video>
+
+        <!-- 과제 11.10 -->
+        <form>
+          <h3>숫자 더하기 \^.^/</h3>
+          <div><input type="number" id="n1" required /></div>
+          <div><input type="number" id="n2" required /></div>
+          <div><input type="button" value="더하기" onclick="adder()" /></div>
+          <a href="https://github.com/">Github &rarr;</a>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

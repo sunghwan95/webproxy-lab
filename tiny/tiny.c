@@ -139,6 +139,7 @@ int parse_uri(char* uri, char* filename, char* cgiargs){
 void serve_static(int fd, char* filename, int filesize){
   int srcfd;
   char *srcp, filetype[MAXLINE], buf[MAXBUF];
+  rio_t rio;
 
   get_filetype(filename, filetype); // 파일 타입 검사
   sprintf(buf, "HTTP/1.0 200 OK\r\n");
@@ -158,11 +159,12 @@ void serve_static(int fd, char* filename, int filesize){
   Munmap(srcp, filesize); // 매핑된 가상메모리 해제
   */
 
-  // 과제 11.9
-  srcp = (char*)malloc(filesize);
+  // !!!!!!! 과제 11.9 !!!!!!!
+  srcp = malloc(filesize); // 메모리 할당
+  Rio_readinitb(&rio, srcfd); // 파일을 버퍼로 읽기위해 초기화
   Rio_readn(srcfd, srcp, filesize);
-  Close(srcfd); // 메모리 누수 방지를 위해 더 이상 필요없는 식별자는 닫아버리기
-  Rio_writen(fd, srcp, filesize); // 주소 srcp에서 시작하는 filesize를 클라이언트의 연결 식별자인 fd로 복사
+  Close(srcfd); // 메모리 누수 방지를 위해 더 이상 필요없는 파일식별자는 닫아버리기
+  Rio_writen(fd, srcp, filesize); // 파일 내용을 클라이언트에게 전송
   free(srcp); // 매핑된 가상메모리 주소 반환
 }
 
