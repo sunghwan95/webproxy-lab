@@ -104,7 +104,7 @@ void read_requesthdrs(rio_t* rp){
   char buf[MAXLINE];
 
   Rio_readlineb(rp, buf, MAXLINE);
-  while(strcmp(buf, "\r\n")){// 버퍼에서 읽은 줄이 '\r\n'이 아닐 때 까지 루프돌기
+  while(strcmp(buf, "\r\n")){// 버퍼에서 읽은 줄이 '\r\n'이 될  까지 루프돌기
     Rio_readlineb(rp, buf, MAXLINE);
     printf("%s", buf); // 헤더 필드 출력
   }
